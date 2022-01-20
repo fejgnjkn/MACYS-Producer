@@ -1,6 +1,8 @@
 package com.zensar.dto;
 
-public class Name {
+import java.io.Serializable;
+
+public class Name implements Serializable {
 	public String firstName;
 	public String lastName;
 	public int seperatorName0;

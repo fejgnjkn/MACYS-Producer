@@ -3,7 +3,7 @@ package com.zensar.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class FulfillmentOrder  { 
+public class FulfillmentOrder implements Serializable { 
 	public int orderID;
 	public String orderTypeCode;
 	public String partnerOrderID;

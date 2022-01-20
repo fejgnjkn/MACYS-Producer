@@ -1,6 +1,8 @@
 package com.zensar.dto;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable{
 
 	public int custID;
 	public Name name;

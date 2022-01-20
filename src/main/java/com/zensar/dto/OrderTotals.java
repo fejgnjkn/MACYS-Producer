@@ -1,6 +1,8 @@
 package com.zensar.dto;
 
-public class OrderTotals {
+import java.io.Serializable;
+
+public class OrderTotals implements Serializable{
 	public double totalPurchaseAmount;
 	public int seperatorOrderTotals0;
 }

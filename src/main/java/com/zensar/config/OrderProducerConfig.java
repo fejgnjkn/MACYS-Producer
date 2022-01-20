@@ -100,8 +100,8 @@ public class OrderProducerConfig {
 	public AmqpTemplate jsonRabbitTemplate(ConnectionFactory connectionFactory) {
 
 		final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-//		rabbitTemplate.setRoutingKey(ROUTING_KEY_JSON);
-//		rabbitTemplate.setDefaultReceiveQueue(QueueType.JSON_QUEUE);
+		rabbitTemplate.setRoutingKey(ROUTING_KEY_JSON);
+		rabbitTemplate.setDefaultReceiveQueue(QueueType.JSON_QUEUE);
 		rabbitTemplate.setMessageConverter(messageConverterJson());
 
 		return rabbitTemplate;

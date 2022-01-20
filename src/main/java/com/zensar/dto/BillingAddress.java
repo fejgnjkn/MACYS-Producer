@@ -1,6 +1,8 @@
 package com.zensar.dto;
 
-public class BillingAddress {
+import java.io.Serializable;
+
+public class BillingAddress implements Serializable {
 	public Contact contact;
 }
 

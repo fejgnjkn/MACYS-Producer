@@ -15,21 +15,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.zensar.MacysOrderMessageProducerApplication;
 import com.zensar.dto.FulfillmentOrder;
 import com.zensar.services.OrderMessageProducerService;
 
-
-@WebAppConfiguration
-
-@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-servlet.xml"}) //  Because there's no  applicationContext-quartz.xml  The configuration file is loaded in , So it leads to the occurrence of anomalies 
-
 @SpringBootTest
+@WebAppConfiguration
+@ContextConfiguration(classes = MacysOrderMessageProducerApplication.class)
 @AutoConfigureMockMvc
 public class OrderMessageProducerControllerTest {
 	
@@ -51,13 +50,14 @@ public class OrderMessageProducerControllerTest {
 	
 	@Test
 	final void testPublishJsonMessages() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.post("/consume/json").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
+		String jsonString= "{\"command\":\"ADD\",\"imagePathname\":null,\"itemDescription\":\"FLAT WALLET\",\"itemHeight\":1.3,\"itemLength\":2.3,\"itemName\":\"WALLET\",\"itemWeight\":1.5,\"itemWidth\":0.5,\"messageName\":\"TannMessage\",\"pickType\":\"E\",\"rfidTagged\":\"Y\",\"storageAttribute\":1,\"upcList\":null}";
+		mockMvc.perform(MockMvcRequestBuilders.post("/publish/json").content(jsonString).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
 	}
 	
 	@Test
 	final void testPublishXmlMessages() throws Exception {
 		
-		when(orderMessageProducerService.publishXmlMessages(fulfillmentOrder)).thenReturn("xml Message is published by producer");
+		when(orderMessageProducerService.publishXmlMessages(fulfillmentOrder)).thenReturn("xmml Message is published by producer");
 //		mockMvc.perform(MockMvcRequestBuilders.post("/publish/xml").accept(MediaType.APPLICATION_XML)).andExpect(status().isOk()).andReturn();
 	}
 	
