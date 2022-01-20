@@ -2,7 +2,7 @@ package com.zensar.dto;
 
 import java.io.Serializable;
 
-public class Source implements Serializable{
+public class Source{
 	public String clientID;
 	public String subClientID;
 	public String sellingChannelCode;

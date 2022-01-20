@@ -12,6 +12,9 @@ public class MacysOrderMessageProducerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MacysOrderMessageProducerApplication.class, args);
+	
+		System.out.println("inside Order Message producer");
+	
 	}
 	
 	

@@ -18,29 +18,25 @@ import com.zensar.dto.OrderMessage;
 @Service
 public class OrderMessageProducerServiceImp implements OrderMessageProducerService {
 
-	
-
 	@Autowired
 	public RabbitTemplate jsonRabbitTemplate;
-	
+
 	@Autowired
 	public RabbitTemplate xmlRabbitTemplate;
-	
-	
+
 	@Override
 	public String publishJsonMessage(OrderMessage orderMessage) {
-		jsonRabbitTemplate.convertAndSend(OrderProducerConfig.QueueType.JSON_QUEUE,orderMessage);
+		jsonRabbitTemplate.convertAndSend(OrderProducerConfig.MESSAGE_EXCHANGE,
+				OrderProducerConfig.ROUTING_KEY_JSON, orderMessage);
 		return "Json Message is published by producer";
 	}
 
-
 	@Override
 	public String publishXmlMessages(FulfillmentOrder fulfillmentOrder) {
-		xmlRabbitTemplate.convertAndSend(OrderProducerConfig.QueueType.XML_QUEUE,
+		xmlRabbitTemplate.convertAndSend(OrderProducerConfig.MESSAGE_EXCHANGE,
+				OrderProducerConfig.ROUTING_KEY_XML,
 				fulfillmentOrder);
 		return "xml Message is published by producer";
 	}
 
-	
 }
-
